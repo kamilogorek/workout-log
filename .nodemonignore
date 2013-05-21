@@ -1,0 +1,10 @@
+# Static files folder
+/public/*
+
+# Root files which shouldn't trigger server reload
+./.editorconfig
+./.gitattribute
+./.gitignore
+./.nodemonignore
+./README.md
+./package.json
