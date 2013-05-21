@@ -1,8 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose');
+mongoose = require('mongoose');
 
-var exerciseSchema = mongoose.Schema({
+exerciseSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
