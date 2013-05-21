@@ -21,7 +21,8 @@ module.exports = {
         exercise.save((err, exercise) ->
             if err
                 console.log('error');
-                res.send(err);
+                # TODO: Refactor custom validation messages
+                res.send(err.message + '. Field: ' + err.errors.name.path + '. Validation: ' + err.errors.name.type);
                 return;
 
             res.send({
@@ -59,7 +60,8 @@ module.exports = {
             exercise.save((err, exercise) ->
                 if err
                     console.log('error');
-                    res.send(err);
+                    # TODO: Refactor custom validation messages
+                    res.send(err.message + '. Field: ' + err.errors.name.path + '. Validation: ' + err.errors.name.type);
                     return;
 
                 res.send({
@@ -71,10 +73,17 @@ module.exports = {
         );
 
     removeItem: (req, res) ->
-        response = {
-            requestType: req.method,
-            id: req.params.id
-        };
+        Exercise.findById(req.params.id, (err, exercise) ->
+            exercise.remove((err, exercise) ->
+                if err
+                    console.log('error');
+                    res.send(err.message);
+                    return;
 
-        res.send(response);
+                res.send({
+                    requestType: req.method,
+                    id: req.params.id
+                });
+            );
+        );
 };
