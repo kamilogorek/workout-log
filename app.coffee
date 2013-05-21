@@ -59,16 +59,7 @@ app.configure('production', ->
 
 # Set application routes
 router = require('./router');
-
-app.get('/', (req, res) ->
-    res.send('Welcome to my workout log!');
-);
-
-app.post('/exercises', router.exercises.postItem);
-app.get('/exercises', router.exercises.getCollection);
-app.get('/exercises/:id', router.exercises.getItem);
-app.put('/exercises/:id', router.exercises.putItem);
-app.delete('/exercises/:id', router.exercises.removeItem);
+router.init.call(app);
 
 # Start application server
 app.listen(app.get('port'), ->
