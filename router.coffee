@@ -1,16 +1,17 @@
 'use strict';
 
-router = {
+routes = {
     static: require('./routes/static'),
     exercises: require('./routes/exercises')
 };
 
 init = ->
-    this.get('/', router.static.index);
-    this.post('/exercises', router.exercises.postItem);
-    this.get('/exercises', router.exercises.getCollection);
-    this.get('/exercises/:id', router.exercises.getItem);
-    this.put('/exercises/:id', router.exercises.putItem);
-    this.delete('/exercises/:id', router.exercises.removeItem);
+    this.get('/', routes.static.index);
+    this.get('/partials/:name', routes.static.partials);
+    this.post('/exercises', routes.exercises.postItem);
+    this.get('/exercises', routes.exercises.getCollection);
+    this.get('/exercises/:id', routes.exercises.getItem);
+    this.put('/exercises/:id', routes.exercises.putItem);
+    this.delete('/exercises/:id', routes.exercises.removeItem);
 
 exports.init = init;

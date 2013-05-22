@@ -1,34 +1,33 @@
 'use strict';
 
-express = require('express');
 path = require('path');
-
-# Create express application
-app = express();
+express = require('express');
+router = require('./router');
 database = require('./database');
 
-# Set server port
-app.set('port', process.env.PORT ? 3000);
-
-# Serves application favicon
-app.use(express.favicon());
-
-# Gzip all responses
-app.use(express.compress());
-
-# Make RESTful requests accessible
-app.use(express.methodOverride());
-
-# Parse request (json, urlencode, multipart)
-app.use(express.bodyParser());
-
-# Mount routes
-app.use(app.router);
-
-# Set path for static files
-app.use(express.static(path.join(__dirname, 'public')));
+# Create express application
+# app = module.exports = express();
+app = express();
 
 process.env.NODE_ENV = 'development';
+
+app.configure ->
+    # Set server port
+    app.set('port', process.env.PORT ? 3000);
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'jade');
+    # Serves application favicon
+    app.use(express.favicon());
+    # Gzip all responses
+    app.use(express.compress());
+    # Make RESTful requests accessible
+    app.use(express.methodOverride());
+    # Parse request (json, urlencode, multipart)
+    app.use(express.bodyParser());
+    # Mount routes
+    app.use(app.router);
+    # Set path for static files
+    app.use(express.static(path.join(__dirname, 'public')));
 
 # Configure development environment
 app.configure('development', ->
@@ -58,7 +57,6 @@ app.configure('production', ->
 );
 
 # Set application routes
-router = require('./router');
 router.init.call(app);
 
 # Start application server
