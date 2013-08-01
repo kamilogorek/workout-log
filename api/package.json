@@ -1,0 +1,28 @@
+{
+    "name": "workout-log",
+    "version": "0.0.1",
+    "author": {
+        "name": "Kamil Ogórek",
+        "email": "kamil.ogorek@gmail.com",
+        "twitter": "kamilogorek"
+    },
+    "description": "Day to day workout and nutrition tracking application",
+    "scripts": {
+        "start": "nodemon ./app.coffee"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kamilogorek/workout-log.git"
+    },
+    "dependencies": {
+        "express": "3.3.4",
+        "mongoose": "3.6.15"
+    },
+    "devDependencies": {
+        "nodemon": "0.7.8",
+    },
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.10.0"
+    }
+}
