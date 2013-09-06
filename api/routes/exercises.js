@@ -1,89 +1,89 @@
 'use strict';
 
-###
-Exercises Routes
+/*
+ * Exercises Routes
+ *
+ * body = 'Hello World';
+ * res.setHeader('Content-Type', 'text/plain');
+ * res.setHeader('Content-Length', body.length);
+ * res.end(body);
+ */
 
-body = 'Hello World';
-res.setHeader('Content-Type', 'text/plain');
-res.setHeader('Content-Length', body.length);
-res.end(body);
-###
-
-Exercise = require('../models/exercise');
+var Exercise = require('../models/exercise');
 
 module.exports = {
-    postItem: (req, res) ->
-        exercise = new Exercise({
+    postItem: function(req, res) {
+        var exercise = new Exercise({
             name: req.body.name,
             description: req.body.description
         });
 
-        exercise.save((err, exercise) ->
-            if err
+        exercise.save(function(err, exercise) {
+            if (err) {
                 console.log('error');
-                # TODO: Refactor custom validation messages
+                // TODO: Refactor custom validation messages
                 res.send(err.message + '. Field: ' + err.errors.name.path + '. Validation: ' + err.errors.name.type);
                 return;
+            }
 
             res.send({
                 requestType: req.method,
                 body: exercise
             });
-        );
-
-    getCollection: (req, res) ->
-        Exercise.find((err, exercises) ->
-            response = {
+        });
+    },
+    getCollection: function(req, res) {
+        Exercise.find(function(err, exercises) {
+            res.send({
                 requestType: req.method,
                 data: exercises
-            };
-
-            res.send(response);
-        );
-
-    getItem: (req, res) ->
-        Exercise.findById(req.params.id, (err, exercise) ->
-            response = {
+            });
+        });
+    },
+    getItem: function(req, res) {
+        Exercise.findById(req.params.id, function(err, exercise) {
+            res.send({
                 requestType: req.method,
                 id: req.params.id,
                 data: exercise
-            };
-
-            res.send(response);
-        );
-
-    putItem: (req, res) ->
-        Exercise.findById(req.params.id, (err, exercise) ->
+            });
+        });
+    },
+    putItem: function(req, res) {
+        Exercise.findById(req.params.id, function(err, exercise) {
             exercise.name = req.body.name;
             exercise.description = req.body.description;
 
-            exercise.save((err, exercise) ->
-                if err
+            exercise.save(function(err, exercise) {
+                if (err) {
                     console.log('error');
-                    # TODO: Refactor custom validation messages
+                    // TODO: Refactor custom validation messages
                     res.send(err.message + '. Field: ' + err.errors.name.path + '. Validation: ' + err.errors.name.type);
                     return;
+                }
 
                 res.send({
                     requestType: req.method,
                     id: req.params.id,
                     body: exercise
                 });
-            );
-        );
-
-    removeItem: (req, res) ->
-        Exercise.findById(req.params.id, (err, exercise) ->
-            exercise.remove((err, exercise) ->
-                if err
+            });
+        });
+    },
+    removeItem: function(req, res) {
+        Exercise.findById(req.params.id, function(err, exercise) {
+            exercise.remove(function(err) {
+                if (err) {
                     console.log('error');
                     res.send(err.message);
                     return;
+                }
 
                 res.send({
                     requestType: req.method,
                     id: req.params.id
                 });
-            );
-        );
+            });
+        });
+    }
 };

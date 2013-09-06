@@ -3,15 +3,5 @@
 /views/*
 
 # Root files which shouldn't trigger server reload
-./.bowerrc
-./.editorconfig
-./.gitattributes
-./.gitignore
-./.jshintrc
 ./.nodemonignore
-./component.json
-./Gruntfile.js
-./karma-e2e.conf.js
-./karma.conf.js
 ./package.json
-./README.md

@@ -1,15 +1,15 @@
 'use strict';
 
-mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-# Connect to database
+// Connect to database
 mongoose.connect('mongodb://localhost/workout-log-dev');
 
-database = mongoose.connection;
+var database = mongoose.connection;
 
 database.on('error', console.error.bind(console, 'connection error:'));
-database.once('open', ->
+database.once('open', function() {
     console.log('Database connection reached.');
-);
+});
 
 module.exports = database;

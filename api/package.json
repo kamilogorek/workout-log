@@ -8,7 +8,7 @@
     },
     "description": "Day to day workout and nutrition tracking application",
     "scripts": {
-        "start": "nodemon ./app.coffee"
+        "start": "nodemon ./app.js"
     },
     "repository": {
         "type": "git",
@@ -16,7 +16,8 @@
     },
     "dependencies": {
         "express": "3.3.4",
-        "mongoose": "3.6.15"
+        "mongoose": "3.6.15",
+        "coffee-script": "1.6.3"
     },
     "devDependencies": {
         "nodemon": "0.7.8"
